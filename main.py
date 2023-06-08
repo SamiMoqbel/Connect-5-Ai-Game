@@ -9,46 +9,47 @@ def playAMove():
     while True:
         testInput=input("Please enter position: ")
         testInput=testInput.lower()
-        print(testInput)
+        #print(testInput)
         coordinates[0]=ROWS-int(testInput[0])-1
         if (int(testInput[0]) < 1 or int(testInput[0]) > 8):
             print("WRONG INPUT !!")
         else:
             if testInput[1] == "a":
-                print("A column")
+                #print("A tempColumn")
                 coordinates[1]=1
                 #BOARD[ROWS-int(testInput[0])-1][1]=WHITE
                 break
             elif testInput[1] == "b":
-                print("B column")
+                #print("B tempColumn")
                 coordinates[1] = 2
                 break
             elif testInput[1] == "c":
-                print("c column")
+                #print("c tempColumn")
                 coordinates[1] = 3
                 break
             elif testInput[1] == "d":
-                print("d column")
+                #print("d tempColumn")
                 coordinates[1] = 4
                 break
             elif testInput[1] == "e":
-                print("e column")
+                #print("e tempColumn")
                 coordinates[1] = 5
                 break
             elif testInput[1] == "f":
-                print("f column")
+                #print("f tempColumn")
                 coordinates[1] = 6
                 break
             elif testInput[1] == "g":
-                print("g column")
+                #print("g tempColumn")
                 coordinates[1] = 7
                 break
             elif testInput[1] == "h":
-                print("h column")
+                #print("h tempColumn")
                 coordinates[1] = 8
                 break
             else:
                 print("WRONG INPUT!!")
+    #print(f"RETURN IS {coordinates}")
     return coordinates
 
 def printMenu():
@@ -91,10 +92,34 @@ if __name__ == "__main__":
         choice=int(input("Please choose a game mode: "))
         if choice == 1:
             printBoard()
-            result = playAMove()
-            BOARD[result[0]][result[1]] = WHITE
-            printBoard()
-            break
+            while True:
+                result = playAMove()
+                row=result[0]
+                column=result[1]
+                if BOARD[row][column] != "":
+                    print("BAD MOVE!")
+                else:
+                    if column < 5:
+                        for index, tempColumn in enumerate(BOARD[row][1:(column + 1)], start=1):
+                            if (tempColumn == "" and index != column) :
+                                print("BAD MOVE!")
+                                break
+                            elif (index == column) :
+                                BOARD[row][column] = WHITE
+                                printBoard()
+                    else:
+
+                        for tempColumn in range(8, (column - 1), -1):
+                            #print(tempColumn)
+                            if (BOARD[row][tempColumn]== "" and tempColumn != column):
+                                print("BAD MOVE!")
+                                break
+                            elif (tempColumn == column):
+                                BOARD[row][column] = WHITE
+                                printBoard()
+
+
+
         elif choice == 2:
             printBoard()
             break
