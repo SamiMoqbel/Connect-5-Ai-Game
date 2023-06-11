@@ -72,6 +72,12 @@ def printBoard():
     # Lower BORDER OF ABCDEFGH
     print(f"\t\t{BOARD[9][1]}\t\t{BOARD[9][2]}\t\t{BOARD[9][3]}\t\t{BOARD[9][4]}\t\t{BOARD[9][5]}\t\t{BOARD[9][6]}\t\t{BOARD[9][7]}\t\t{BOARD[9][8]}\t\t{BOARD[9][9]}\t")
 
+def getTurn(turn):
+    print(f"turn is: {turn}")
+    if (int(turn) % 2 == 0 ):
+        return BLACK
+    else:
+        return WHITE
 
 if __name__ == "__main__":
 
@@ -88,6 +94,7 @@ if __name__ == "__main__":
 
 
     while True:
+        TURN=0
         printMenu()
         choice=int(input("Please choose a game mode: "))
         if choice == 1:
@@ -105,8 +112,9 @@ if __name__ == "__main__":
                                 print("BAD MOVE!")
                                 break
                             elif (index == column) :
-                                BOARD[row][column] = WHITE
+                                BOARD[row][column] = getTurn(TURN)
                                 printBoard()
+                                TURN = TURN + 1
                     else:
 
                         for tempColumn in range(8, (column - 1), -1):
@@ -115,8 +123,9 @@ if __name__ == "__main__":
                                 print("BAD MOVE!")
                                 break
                             elif (tempColumn == column):
-                                BOARD[row][column] = WHITE
+                                BOARD[row][column] = getTurn(TURN)
                                 printBoard()
+                                TURN = TURN + 1
 
 
 
