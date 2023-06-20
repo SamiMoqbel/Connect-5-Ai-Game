@@ -2,6 +2,13 @@
 #Lama Abdelmohsen : 1201138
 #AI Magnetic Cave Game
 
+"""
+
+“We certify that this submission is the original work of members of the group and meets
+the Faculty's Expectations of Originality”
+
+"""
+
 import copy
 
 COLUMNS=10
