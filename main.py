@@ -1,13 +1,26 @@
+#Sami Moqbel : 1200751
+#Lama Abdelmohsen : 1201138
+#AI Magnetic Cave Game
+
+import copy
+
 COLUMNS=10
 ROWS=10
 BLACK="\u25A2"
 WHITE="\u25A0"
 BOARD = [["" for _ in range(COLUMNS)] for _ in range(ROWS)]
+PLAYER=BLACK
 
 def playAMove():
     coordinates=[0,0]
     while True:
-        testInput=input("Please enter position: ")
+
+        if PLAYER== BLACK:
+            player="PLAYER 1"
+        else:
+            player="PLAYER 2"
+
+        testInput=input(f"[{player}] Please enter position: ")
         testInput=testInput.lower()
         #print(testInput)
         coordinates[0]=ROWS-int(testInput[0])-1
@@ -58,26 +71,208 @@ def printMenu():
     print("3) Player vs Bot (Bot starts first)")
     print("4) EXIT ! ")
 
-def printBoard():
+
+def printBoard(board):
 
     #Upper BORDER OF ABCDEFGH
-    print(f"\t\t{BOARD[0][1]}\t\t{BOARD[0][2]}\t\t{BOARD[0][3]}\t\t{BOARD[0][4]}\t\t{BOARD[0][5]}\t\t{BOARD[0][6]}\t\t{BOARD[0][7]}\t\t{BOARD[0][8]}\t\t{BOARD[0][9]}\t")
+    print(f"\t\t{board[0][1]}\t\t{board[0][2]}\t\t{board[0][3]}\t\t{board[0][4]}\t\t{board[0][5]}\t\t{board[0][6]}\t\t{board[0][7]}\t\t{board[0][8]}\t\t{board[0][9]}\t")
     print("\t-----------------------------------------------------------------")
 
     #ITERATE THROUGH 1 to 8 because first and last rows are for BORDER
-    for index, row in enumerate(BOARD[1:9], start=1):
+    for index, row in enumerate(board[1:9], start=1):
         print(f"{row[0]}\t|\t{row[1]}\t|\t{row[2]}\t|\t{row[3]}\t|\t{row[4]}\t|\t{row[5]}\t|\t{row[6]}\t|\t{row[7]}\t|\t{row[8]}\t|\t{row[9]}\t")
         print("\t-----------------------------------------------------------------")
 
     # Lower BORDER OF ABCDEFGH
-    print(f"\t\t{BOARD[9][1]}\t\t{BOARD[9][2]}\t\t{BOARD[9][3]}\t\t{BOARD[9][4]}\t\t{BOARD[9][5]}\t\t{BOARD[9][6]}\t\t{BOARD[9][7]}\t\t{BOARD[9][8]}\t\t{BOARD[9][9]}\t")
+    print(f"\t\t{board[9][1]}\t\t{board[9][2]}\t\t{board[9][3]}\t\t{board[9][4]}\t\t{board[9][5]}\t\t{board[9][6]}\t\t{board[9][7]}\t\t{board[9][8]}\t\t{board[9][9]}\t")
 
-def getTurn(turn):
-    print(f"turn is: {turn}")
-    if (int(turn) % 2 == 0 ):
-        return BLACK
+
+
+def changeTurn():
+    global PLAYER
+
+    if (PLAYER == BLACK ):
+        PLAYER = WHITE
     else:
-        return WHITE
+        PLAYER = BLACK
+
+
+def emptySpots():
+    moves=[]
+    for row in range(1,ROWS):
+          for col in range(1,COLUMNS):
+              if BOARD[row][col] =="":
+                move = (row, col)  # Create a tuple with the row and column
+                moves.append(move)  # Store the tuple in the moves list
+    return  moves
+
+def availableSpots():
+    availableMoves=[]
+    starterColumn=1
+    latestColumn=8
+
+    for row in range(1,ROWS-1):
+        starterColumn = 1
+        if(BOARD[row][starterColumn]==""):
+            availableMoves.append((row,starterColumn))
+        else:
+            while(BOARD[row][starterColumn] !="" and starterColumn+1 < 9):
+                starterColumn=starterColumn+1
+                #print(f"STARTER {starterColumn}")
+            if (BOARD[row][starterColumn] == WHITE or BOARD[row][starterColumn]== BLACK):
+                pass
+            else:
+                availableMoves.append((row,starterColumn))
+
+
+    for row in range(1,ROWS-1):
+        latestColumn = 8
+        if(BOARD[row][latestColumn]==""):
+            availableMoves.append((row,latestColumn))
+        else:
+
+            while(BOARD[row][latestColumn] !="" and latestColumn-1 > 0):
+                latestColumn=latestColumn-1
+                #print(f"LATEST {latestColumn}")
+            if (BOARD[row][latestColumn] == WHITE or BOARD[row][latestColumn] == BLACK):
+                pass
+            else:
+                availableMoves.append((row,latestColumn))
+
+    return set(availableMoves)
+
+
+
+def winnerIsBlack():
+    # Check horizontal winning
+    for row in range(1,ROWS-1):
+        for col in range(1,COLUMNS - 5):
+            if (BOARD[row][col] ==BLACK and
+                BOARD[row][col + 1] == BLACK and
+                BOARD[row][col + 2] == BLACK and
+                BOARD[row][col + 3] == BLACK and
+                BOARD[row][col + 4] == BLACK):
+                    return True
+    for row in range(1,ROWS - 5):
+        for col in range(1,COLUMNS-1):
+            if (BOARD[row][col] == BLACK and
+                BOARD[row + 1][col] ==BLACK and
+                BOARD[row + 2][col] ==BLACK and
+                BOARD[row + 3][col] ==BLACK and
+                BOARD[row + 4][col] ==BLACK):
+                    return True
+
+    for row in range(1,ROWS - 5):#needs update
+        for col in range(1,COLUMNS - 5): #needs update
+            if (BOARD[row][col] == BLACK and
+                BOARD[row + 1][col + 1] == BLACK and
+                BOARD[row + 2][col + 2] == BLACK and
+                BOARD[row + 3][col + 3] == BLACK and
+                BOARD[row + 4][col + 4] == BLACK):
+                    return True
+
+    for row in range(5, ROWS):
+        for col in range(1,COLUMNS - 5):
+            if (BOARD[row][col] == BLACK and
+                BOARD[row -1 ][col + 1] == BLACK and
+                BOARD[row -2][col + 2] == BLACK and
+                BOARD[row -3][col + 3] == BLACK and
+                BOARD[row -4][col + 4] == BLACK):
+                    return True
+
+    return False
+
+
+def winnerIsWhite():
+    # Check horizontal winning
+    for row in range(1,ROWS-1):
+        for col in range(1,COLUMNS - 5):
+            if (BOARD[row][col] ==WHITE and
+                BOARD[row][col + 1] == WHITE and
+                BOARD[row][col + 2] == WHITE and
+                BOARD[row][col + 3] == WHITE and
+                BOARD[row][col + 4] == WHITE):
+                    return True
+
+    for row in range(1,ROWS - 5):
+        for col in range(1,COLUMNS-1):
+            if (BOARD[row][col] == WHITE and
+                BOARD[row + 1][col] ==WHITE and
+                BOARD[row + 2][col] ==WHITE and
+                BOARD[row + 3][col] ==WHITE and
+                BOARD[row + 4][col] ==WHITE):
+                    return True
+
+    for row in range(1,ROWS - 5):
+        for col in range(1,COLUMNS - 5):
+            if (BOARD[row][col] == WHITE and
+                BOARD[row + 1][col + 1] == WHITE and
+                BOARD[row + 2][col + 2] == WHITE and
+                BOARD[row + 3][col + 3] == WHITE and
+                BOARD[row + 4][col + 4] == WHITE):
+                    return True
+
+    for row in range(5, ROWS):
+        for col in range(1,COLUMNS - 5):
+            if (BOARD[row][col] == WHITE and
+                BOARD[row -1 ][col + 1] == WHITE and
+                BOARD[row -2][col + 2] == WHITE and
+                BOARD[row -3][col + 3] ==WHITE and
+                BOARD[row -4][col + 4] == WHITE ):
+                    return True
+
+    return False
+
+
+
+def EvaluateFunction():
+
+    if winnerIsWhite()==True:
+        return 1
+    elif winnerIsBlack()==True:
+        return -1
+    else:
+        return 0
+
+
+def minimax(board, depth, maximizingPlayer):
+    if depth == 0 or winnerIsWhite() or winnerIsBlack():
+        return EvaluateFunction(), board  # Return the evaluation value and the current board state
+
+    if maximizingPlayer:
+        maxEval = float('-inf')
+        bestMove = None
+        moves = availableSpots()
+        for move in moves:
+            tempBoard = copy.deepcopy(board)
+            tempBoard[move[0]][move[1]] = WHITE
+            evaluation = minimax(tempBoard, depth - 1, False)[0]
+            if evaluation >= maxEval:
+                maxEval = evaluation
+                bestMove = tempBoard
+
+        return maxEval, bestMove
+
+    else:
+        minEval = float('inf')
+        bestMove = None
+        moves = availableSpots()
+        for move in moves:
+            tempBoard = copy.deepcopy(board)
+            tempBoard[move[0]][move[1]] = BLACK
+            evaluation = minimax(tempBoard, depth - 1, True)[0]
+            if evaluation <= minEval:
+                minEval = evaluation
+                bestMove = tempBoard
+
+        return minEval, bestMove
+
+
+
+def Game_Over(emptySpots):
+    if emptySpots==0:
+        print("Game over!")
+        exit()
 
 if __name__ == "__main__":
 
@@ -94,11 +289,12 @@ if __name__ == "__main__":
 
 
     while True:
-        TURN=0
+
         printMenu()
         choice=int(input("Please choose a game mode: "))
         if choice == 1:
-            printBoard()
+            PLAYER = BLACK
+            printBoard(BOARD)
             while True:
                 result = playAMove()
                 row=result[0]
@@ -106,15 +302,45 @@ if __name__ == "__main__":
                 if BOARD[row][column] != "":
                     print("BAD MOVE!")
                 else:
-                    if column < 5:
+                    if column != 1 and column != 8 and (BOARD[row][column - 1] != "" or BOARD[row][column + 1] != ""):
+
+                        BOARD[row][column] = PLAYER
+                        blankSpots = len(emptySpots()) - 1
+                        # print(len(emptySpots())-1)
+                        changeTurn()
+                        printBoard(BOARD)
+                        #print(availableSpots())
+                        if(winnerIsBlack()):
+                            print("BLACK WON THE GAME, GG!")
+                            exit()
+                        if (winnerIsWhite()):
+                            print("BLACK WON THE GAME, GG!")
+                            exit()
+                        Game_Over(int(blankSpots))
+
+
+
+                    elif column < 5:
                         for index, tempColumn in enumerate(BOARD[row][1:(column + 1)], start=1):
                             if (tempColumn == "" and index != column) :
                                 print("BAD MOVE!")
                                 break
                             elif (index == column) :
-                                BOARD[row][column] = getTurn(TURN)
-                                printBoard()
-                                TURN = TURN + 1
+                                BOARD[row][column] = PLAYER
+                                blankSpots = len(emptySpots()) - 1
+                                #print(len(emptySpots())-1)
+                                changeTurn()
+                                printBoard(BOARD)
+                                #print(availableSpots())
+                                if (winnerIsBlack()):
+                                    print("BLACK WON THE GAME, GG!")
+                                    exit()
+                                if (winnerIsWhite()):
+                                    print("BLACK WON THE GAME, GG!")
+                                    exit()
+                                Game_Over(int(blankSpots))
+
+
                     else:
 
                         for tempColumn in range(8, (column - 1), -1):
@@ -123,18 +349,198 @@ if __name__ == "__main__":
                                 print("BAD MOVE!")
                                 break
                             elif (tempColumn == column):
-                                BOARD[row][column] = getTurn(TURN)
-                                printBoard()
-                                TURN = TURN + 1
+                                BOARD[row][column] = PLAYER
+                                blankSpots=len(emptySpots()) - 1
+                                changeTurn()
+                                printBoard(BOARD)
+                                #print(availableSpots())
+                                if (winnerIsBlack()):
+                                    print("BLACK WON THE GAME, GG!")
+                                    exit()
+                                if (winnerIsWhite()):
+                                    print("BLACK WON THE GAME, GG!")
+                                    exit()
+                                Game_Over(int(blankSpots))
+
 
 
 
         elif choice == 2:
-            printBoard()
-            break
+            printBoard(BOARD)
+            while True:
+                if PLAYER==BLACK:
+                    result = playAMove()
+                    row = result[0]
+                    column = result[1]
+                    if BOARD[row][column] != "":
+                        print("BAD MOVE!")
+                    else:
+                        if column != 1 and column != 8 and (
+                                BOARD[row][column - 1] != "" or BOARD[row][column + 1] != ""):
+
+                            BOARD[row][column] = PLAYER
+                            blankSpots = len(emptySpots()) - 1
+                            # print(len(emptySpots())-1)
+                            changeTurn()
+                            printBoard(BOARD)
+                            #print(availableSpots())
+                            if (winnerIsBlack()):
+                                print("BLACK WON THE GAME, GG!")
+                                exit()
+                            if (winnerIsWhite()):
+                                print("BLACK WON THE GAME, GG!")
+                                exit()
+                            Game_Over(int(blankSpots))
+
+
+
+                        elif column < 5:
+                            for index, tempColumn in enumerate(BOARD[row][1:(column + 1)], start=1):
+                                if (tempColumn == "" and index != column):
+                                    print("BAD MOVE!")
+                                    break
+                                elif (index == column):
+                                    BOARD[row][column] = PLAYER
+                                    blankSpots = len(emptySpots()) - 1
+                                    # print(len(emptySpots())-1)
+                                    changeTurn()
+                                    printBoard(BOARD)
+                                    #print(availableSpots())
+                                    if (winnerIsBlack()):
+                                        print("BLACK WON THE GAME, GG!")
+                                        exit()
+                                    if (winnerIsWhite()):
+                                        print("BLACK WON THE GAME, GG!")
+                                        exit()
+                                    Game_Over(int(blankSpots))
+
+
+                        else:
+
+                            for tempColumn in range(8, (column - 1), -1):
+                                # print(tempColumn)
+                                if (BOARD[row][tempColumn] == "" and tempColumn != column):
+                                    print("BAD MOVE!")
+                                    break
+                                elif (tempColumn == column):
+                                    BOARD[row][column] = PLAYER
+                                    blankSpots = len(emptySpots()) - 1
+                                    changeTurn()
+                                    printBoard(BOARD)
+                                    #print(availableSpots())
+                                    if (winnerIsBlack()):
+                                        print("BLACK WON THE GAME, GG!")
+                                        exit()
+                                    if (winnerIsWhite()):
+                                        print("BLACK WON THE GAME, GG!")
+                                        exit()
+                                    Game_Over(int(blankSpots))
+
+
+                else:
+                    print("[PLAYER 2] IS THINKING......")
+                    value,aiMove= minimax(BOARD,4,True)
+                    BOARD=aiMove
+                    changeTurn()
+                    printBoard(BOARD)
+                    if (winnerIsBlack()):
+                        print("BLACK WON THE GAME, GG!")
+                        exit()
+                    if (winnerIsWhite()):
+                        print("WHITE WON THE GAME, GG!")
+                        exit()
+                    Game_Over(int(blankSpots))
+
+
+
         elif choice == 3:
-            printBoard()
-            break
+            PLAYER = WHITE
+            blankSpots = len(emptySpots()) - 1
+            printBoard(BOARD)
+            while True:
+                if PLAYER == BLACK:
+                    result = playAMove()
+                    row = result[0]
+                    column = result[1]
+                    if BOARD[row][column] != "":
+                        print("BAD MOVE!")
+                    else:
+                        if column != 1 and column != 8 and (
+                                BOARD[row][column - 1] != "" or BOARD[row][column + 1] != ""):
+
+                            BOARD[row][column] = PLAYER
+                            blankSpots = len(emptySpots()) - 1
+                            # print(len(emptySpots())-1)
+                            changeTurn()
+                            printBoard(BOARD)
+                            # print(availableSpots())
+                            if (winnerIsBlack()):
+                                print("BLACK WON THE GAME, GG!")
+                                exit()
+                            if (winnerIsWhite()):
+                                print("BLACK WON THE GAME, GG!")
+                                exit()
+                            Game_Over(int(blankSpots))
+
+
+
+                        elif column < 5:
+                            for index, tempColumn in enumerate(BOARD[row][1:(column + 1)], start=1):
+                                if (tempColumn == "" and index != column):
+                                    print("BAD MOVE!")
+                                    break
+                                elif (index == column):
+                                    BOARD[row][column] = PLAYER
+                                    blankSpots = len(emptySpots()) - 1
+                                    # print(len(emptySpots())-1)
+                                    changeTurn()
+                                    printBoard(BOARD)
+                                    # print(availableSpots())
+                                    if (winnerIsBlack()):
+                                        print("BLACK WON THE GAME, GG!")
+                                        exit()
+                                    if (winnerIsWhite()):
+                                        print("BLACK WON THE GAME, GG!")
+                                        exit()
+                                    Game_Over(int(blankSpots))
+
+
+                        else:
+
+                            for tempColumn in range(8, (column - 1), -1):
+                                # print(tempColumn)
+                                if (BOARD[row][tempColumn] == "" and tempColumn != column):
+                                    print("BAD MOVE!")
+                                    break
+                                elif (tempColumn == column):
+                                    BOARD[row][column] = PLAYER
+                                    blankSpots = len(emptySpots()) - 1
+                                    changeTurn()
+                                    printBoard(BOARD)
+                                    # print(availableSpots())
+                                    if (winnerIsBlack()):
+                                        print("BLACK WON THE GAME, GG!")
+                                        exit()
+                                    if (winnerIsWhite()):
+                                        print("BLACK WON THE GAME, GG!")
+                                        exit()
+                                    Game_Over(int(blankSpots))
+
+
+                else:
+                    print("[PLAYER 2] IS THINKING......")
+                    value, aiMove = minimax(BOARD, 4, True)
+                    BOARD = aiMove
+                    changeTurn()
+                    printBoard(BOARD)
+                    if (winnerIsBlack()):
+                        print("BLACK WON THE GAME, GG!")
+                        exit()
+                    if (winnerIsWhite()):
+                        print("WHITE WON THE GAME, GG!")
+                        exit()
+                    Game_Over(int(blankSpots))
+
         elif choice == 4:
             print("CYAA !!!")
             exit()
