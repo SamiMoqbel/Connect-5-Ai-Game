@@ -2,13 +2,6 @@
 #Lama Abdelmohsen : 1201138
 #AI Magnetic Cave Game
 
-"""
-
-“We certify that this submission is the original work of members of the group and meets
-the Faculty's Expectations of Originality”
-
-"""
-
 import copy
 
 COLUMNS=10
@@ -245,32 +238,36 @@ def numberOfWhiteConn():
     for row in range(1, ROWS - 1):
         for col in range(1, COLUMNS - 2):
             if (BOARD[row][col] == WHITE and
-                    BOARD[row][col + 1] == WHITE
+                    BOARD[row][col + 1] == WHITE and
+                    BOARD[row][col + 2] == ""
                     ):
                 #print("Two Connected")
                 twoWConnected=True
 
 
-    for row in range(1, ROWS - 2):
+    for row in range(1, ROWS - 3):
         for col in range(1, COLUMNS - 1):
             if (BOARD[row][col] == WHITE and
-                    BOARD[row + 1][col] == WHITE
+                    BOARD[row + 1][col] == WHITE and
+                    BOARD[row + 2][col] == ""
                     ):
                 #print("Two Connected")
                 twoWConnected = True
 
-    for row in range(1, ROWS - 2):
-        for col in range(1, COLUMNS - 2):
+    for row in range(1, ROWS - 3):
+        for col in range(1, COLUMNS - 3):
             if (BOARD[row][col] == WHITE and
-                    BOARD[row + 1][col + 1] == WHITE
+                    BOARD[row + 1][col + 1] == WHITE and
+                    BOARD[row + 2][col + 2] == ""
                     ):
                 #print("Two Connected")
                 twoWConnected = True
 
-    for row in range(2, ROWS):
-        for col in range(1, COLUMNS - 2):
+    for row in range(3, ROWS):
+        for col in range(1, COLUMNS - 3):
             if (BOARD[row][col] == WHITE and
-                    BOARD[row - 1][col + 1] == WHITE
+                    BOARD[row - 1][col + 1] == WHITE and
+                    BOARD[row - 2][col + 2] == ""
                     ):
                 #print("Two Connected")
                 twoWConnected = True
@@ -280,35 +277,42 @@ def numberOfWhiteConn():
 
 # Check horizontal winning
     for row in range(1,ROWS-1):
-        for col in range(1,COLUMNS - 3):
+        for col in range(1,COLUMNS - 4):
             if (BOARD[row][col] ==WHITE and
                 BOARD[row][col + 1] == WHITE and
-                BOARD[row][col + 2] == WHITE ):
+                BOARD[row][col + 2] == WHITE and
+                BOARD[row][col + 3] == ""
+            ):
                 #print("Three Connected")
                 threeWConnected = True
 
-    for row in range(1,ROWS - 3):
+    for row in range(1,ROWS - 4):
         for col in range(1,COLUMNS-1):
             if (BOARD[row][col] == WHITE and
                 BOARD[row + 1][col] ==WHITE and
-                BOARD[row + 2][col] ==WHITE ):
+                BOARD[row + 2][col] ==WHITE and
+                BOARD[row + 3][col] ==""
+            ):
                 #print("Three Connected")
                 threeWConnected = True
 
-    for row in range(1,ROWS - 3):
-        for col in range(1,COLUMNS - 3):
+    for row in range(1,ROWS - 4):
+        for col in range(1,COLUMNS - 4):
             if (BOARD[row][col] == WHITE and
                 BOARD[row + 1][col + 1] == WHITE and
-                BOARD[row + 2][col + 2] == WHITE
+                BOARD[row + 2][col + 2] == WHITE and
+                BOARD[row + 3][col + 3] == ""
                 ):
                 #print("Three Connected")
                 threeWConnected = True
 
-    for row in range(3, ROWS):
-        for col in range(1,COLUMNS - 3):
+    for row in range(4, ROWS):
+        for col in range(1,COLUMNS - 4):
             if (BOARD[row][col] == WHITE and
                 BOARD[row -1 ][col + 1] == WHITE and
-                BOARD[row -2][col + 2] == WHITE  ):
+                BOARD[row -2][col + 2] == WHITE and
+                BOARD[row -3][col + 3] == ""
+            ):
                 #print("Three Connected")
                 threeWConnected = True
 
@@ -317,38 +321,46 @@ def numberOfWhiteConn():
 
         # Check horizontal winning
         for row in range(1, ROWS - 1):
-            for col in range(1, COLUMNS - 4):
+            for col in range(1, COLUMNS - 5):
                 if (BOARD[row][col] == WHITE and
                         BOARD[row][col + 1] == WHITE and
                         BOARD[row][col + 2] == WHITE and
-                        BOARD[row][col + 3] == WHITE ):
+                        BOARD[row][col + 3] == WHITE and
+                        BOARD[row][col + 4] == ""
+                ):
                     #print("Four Connected")
                     fourWConnected = True
 
-        for row in range(1, ROWS - 4):
+        for row in range(1, ROWS - 5):
             for col in range(1, COLUMNS - 1):
                 if (BOARD[row][col] == WHITE and
                         BOARD[row + 1][col] == WHITE and
                         BOARD[row + 2][col] == WHITE and
-                        BOARD[row + 3][col] == WHITE ):
+                        BOARD[row + 3][col] == WHITE and
+                        BOARD[row + 4][col] == ""
+                ):
                     #print("Four Connected")
                     fourWConnected = True
 
-        for row in range(1, ROWS - 4):
-            for col in range(1, COLUMNS - 4):
+        for row in range(1, ROWS - 5):
+            for col in range(1, COLUMNS - 5):
                 if (BOARD[row][col] == WHITE and
                         BOARD[row + 1][col + 1] == WHITE and
                         BOARD[row + 2][col + 2] == WHITE and
-                        BOARD[row + 3][col + 3] == WHITE ):
+                        BOARD[row + 3][col + 3] == WHITE and
+                        BOARD[row + 4][col + 4] == ""
+                ):
                     #print("Four Connected")
                     fourWConnected = True
 
-        for row in range(4, ROWS):
-            for col in range(1, COLUMNS - 4):
+        for row in range(5, ROWS):
+            for col in range(1, COLUMNS - 5):
                 if (BOARD[row][col] == WHITE and
                         BOARD[row - 1][col + 1] == WHITE and
                         BOARD[row - 2][col + 2] == WHITE and
-                        BOARD[row - 3][col + 3] == WHITE ):
+                        BOARD[row - 3][col + 3] == WHITE and
+                        BOARD[row - 4][col + 4] == ""
+                ):
                     #print("Four Connected")
                     fourWConnected = True
 
@@ -358,61 +370,68 @@ def numberOfBlackConn():
 
     # Check horizontal winning
     for row in range(1, ROWS - 1):
-        for col in range(1, COLUMNS - 2):
+        for col in range(1, COLUMNS - 3):
             if (BOARD[row][col] == BLACK and
-                    BOARD[row][col + 1] == BLACK
+                BOARD[row][col + 1] == BLACK and
+                BOARD[row][col + 2] == ""
             ):
-                #print("Two BLACK Connected")
+
                 twoBConnected = True
 
-    for row in range(1, ROWS - 2):
+    for row in range(1, ROWS - 3):
         for col in range(1, COLUMNS - 1):
             if (BOARD[row][col] == BLACK and
-                    BOARD[row + 1][col] == BLACK
+                BOARD[row + 1][col] == BLACK and
+                BOARD[row + 2][col] == ""
             ):
-                #print("Two BLACK Connected")
+
                 twoBConnected = True
 
-    for row in range(1, ROWS - 2):
-        for col in range(1, COLUMNS - 2):
+    for row in range(1, ROWS - 3):
+        for col in range(1, COLUMNS - 3):
             if (BOARD[row][col] == BLACK and
-                    BOARD[row + 1][col + 1] == BLACK
+                    BOARD[row + 1][col + 1] == BLACK and
+                    BOARD[row + 2][col + 2] == ""
             ):
-                #print("Two BLACK Connected")
+
                 twoBConnected = True
 
-    for row in range(2, ROWS):
-        for col in range(1, COLUMNS - 2):
+    for row in range(3, ROWS):
+        for col in range(1, COLUMNS - 3):
             if (BOARD[row][col] == BLACK and
-                    BOARD[row - 1][col + 1] == BLACK
+                    BOARD[row - 1][col + 1] == BLACK and
+                    BOARD[row - 2][col + 2] == ""
             ):
-                #print("Two BLACK Connected")
+
                 twoBConnected = True
 
     # Three B connected
 
     # Check horizontal winning
     for row in range(1, ROWS - 1):
-        for col in range(1, COLUMNS - 3):
+        for col in range(1, COLUMNS - 4):
             if (BOARD[row][col] == BLACK and
-                    BOARD[row][col + 1] == BLACK and
-                    BOARD[row][col + 2] == BLACK):
+                BOARD[row][col + 1] == BLACK and
+                BOARD[row][col + 2] == BLACK and
+                BOARD[row][col + 3] == "" ):
                 #print("Three BLACK Connected")
                 threeBConnected = True
 
-    for row in range(1, ROWS - 3):
+    for row in range(1, ROWS - 4):
         for col in range(1, COLUMNS - 1):
             if (BOARD[row][col] == BLACK and
                     BOARD[row + 1][col] == BLACK and
-                    BOARD[row + 2][col] == BLACK):
+                    BOARD[row + 2][col] == BLACK and
+                    BOARD[row + 3][col] == ""):
                 #print("Three BLACK Connected")
                 threeBConnected = True
 
-    for row in range(1, ROWS - 3):
-        for col in range(1, COLUMNS - 3):
+    for row in range(1, ROWS - 4):
+        for col in range(1, COLUMNS - 4):
             if (BOARD[row][col] == BLACK and
                     BOARD[row + 1][col + 1] == BLACK and
-                    BOARD[row + 2][col + 2] == BLACK
+                    BOARD[row + 2][col + 2] == BLACK and
+                    BOARD[row + 3][col + 3] == ""
             ):
                 #print("Three BLACK Connected")
                 threeBConnected = True
@@ -421,7 +440,9 @@ def numberOfBlackConn():
         for col in range(1, COLUMNS - 3):
             if (BOARD[row][col] == BLACK and
                     BOARD[row - 1][col + 1] == BLACK and
-                    BOARD[row - 2][col + 2] == BLACK):
+                    BOARD[row - 2][col + 2] == BLACK and
+                    BOARD[row - 3][col + 3] == ""
+            ):
                 #print("Three BLACK Connected")
                 threeBConnected = True
 
@@ -429,44 +450,61 @@ def numberOfBlackConn():
 
         # Check horizontal winning
         for row in range(1, ROWS - 1):
-            for col in range(1, COLUMNS - 4):
+            for col in range(1, COLUMNS - 5):
                 if (BOARD[row][col] == BLACK and
                         BOARD[row][col + 1] == BLACK and
                         BOARD[row][col + 2] == BLACK and
-                        BOARD[row][col + 3] == BLACK):
+                        BOARD[row][col + 3] == BLACK and
+                        BOARD[row][col + 4] == ""
+                ):
                     #print("Four BLACK Connected")
                     fourBConnected = True
 
-        for row in range(1, ROWS - 4):
+        for row in range(1, ROWS - 5):
             for col in range(1, COLUMNS - 1):
                 if (BOARD[row][col] == BLACK and
                         BOARD[row + 1][col] == BLACK and
                         BOARD[row + 2][col] == BLACK and
-                        BOARD[row + 3][col] == BLACK):
+                        BOARD[row + 3][col] == BLACK and
+                        BOARD[row + 4][col] == ""
+                ):
                     #print("Four BLACK Connected")
                     fourBConnected = True
 
-        for row in range(1, ROWS - 4):
-            for col in range(1, COLUMNS - 4):
+        for row in range(1, ROWS - 5):
+            for col in range(1, COLUMNS - 5):
                 if (BOARD[row][col] == BLACK and
                         BOARD[row + 1][col + 1] == BLACK and
                         BOARD[row + 2][col + 2] == BLACK and
-                        BOARD[row + 3][col + 3] == BLACK):
+                        BOARD[row + 3][col + 3] == BLACK and
+                        BOARD[row + 4][col + 4] == ""
+                ):
                     #print("Four BLACK Connected")
                     fourBConnected = True
 
-        for row in range(4, ROWS):
-            for col in range(1, COLUMNS - 4):
+        for row in range(5, ROWS):
+            for col in range(1, COLUMNS - 5):
                 if (BOARD[row][col] == BLACK and
                         BOARD[row - 1][col + 1] == BLACK and
                         BOARD[row - 2][col + 2] == BLACK and
-                        BOARD[row - 3][col + 3] == BLACK):
+                        BOARD[row - 3][col + 3] == BLACK and
+                        BOARD[row - 4][col + 4] == ""
+                ):
                     #print("Four BLACK Connected")
                     fourBConnected = True
 
 
 
 def EvaluateFunction():
+
+    twoWConnected = False
+    threeWConnected = False
+    fourWConnected = False
+    twoBConnected = False
+    threeBConnected = False
+    fourBConnected = False
+
+
     numberOfBlackConn()
     numberOfWhiteConn()
 
