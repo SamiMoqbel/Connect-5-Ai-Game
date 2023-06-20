@@ -240,7 +240,7 @@ def numberOfWhiteConn():
             if (BOARD[row][col] == WHITE and
                     BOARD[row][col + 1] == WHITE
                     ):
-                print("Two Connected")
+                #print("Two Connected")
                 twoWConnected=True
 
 
@@ -249,7 +249,7 @@ def numberOfWhiteConn():
             if (BOARD[row][col] == WHITE and
                     BOARD[row + 1][col] == WHITE
                     ):
-                print("Two Connected")
+                #print("Two Connected")
                 twoWConnected = True
 
     for row in range(1, ROWS - 2):
@@ -257,7 +257,7 @@ def numberOfWhiteConn():
             if (BOARD[row][col] == WHITE and
                     BOARD[row + 1][col + 1] == WHITE
                     ):
-                print("Two Connected")
+                #print("Two Connected")
                 twoWConnected = True
 
     for row in range(2, ROWS):
@@ -265,7 +265,7 @@ def numberOfWhiteConn():
             if (BOARD[row][col] == WHITE and
                     BOARD[row - 1][col + 1] == WHITE
                     ):
-                print("Two Connected")
+                #print("Two Connected")
                 twoWConnected = True
 
 
@@ -277,7 +277,7 @@ def numberOfWhiteConn():
             if (BOARD[row][col] ==WHITE and
                 BOARD[row][col + 1] == WHITE and
                 BOARD[row][col + 2] == WHITE ):
-                print("Three Connected")
+                #print("Three Connected")
                 threeWConnected = True
 
     for row in range(1,ROWS - 3):
@@ -285,7 +285,7 @@ def numberOfWhiteConn():
             if (BOARD[row][col] == WHITE and
                 BOARD[row + 1][col] ==WHITE and
                 BOARD[row + 2][col] ==WHITE ):
-                print("Three Connected")
+                #print("Three Connected")
                 threeWConnected = True
 
     for row in range(1,ROWS - 3):
@@ -294,7 +294,7 @@ def numberOfWhiteConn():
                 BOARD[row + 1][col + 1] == WHITE and
                 BOARD[row + 2][col + 2] == WHITE
                 ):
-                print("Three Connected")
+                #print("Three Connected")
                 threeWConnected = True
 
     for row in range(3, ROWS):
@@ -302,7 +302,7 @@ def numberOfWhiteConn():
             if (BOARD[row][col] == WHITE and
                 BOARD[row -1 ][col + 1] == WHITE and
                 BOARD[row -2][col + 2] == WHITE  ):
-                print("Three Connected")
+                #print("Three Connected")
                 threeWConnected = True
 
 
@@ -315,7 +315,7 @@ def numberOfWhiteConn():
                         BOARD[row][col + 1] == WHITE and
                         BOARD[row][col + 2] == WHITE and
                         BOARD[row][col + 3] == WHITE ):
-                    print("Four Connected")
+                    #print("Four Connected")
                     fourWConnected = True
 
         for row in range(1, ROWS - 4):
@@ -324,7 +324,7 @@ def numberOfWhiteConn():
                         BOARD[row + 1][col] == WHITE and
                         BOARD[row + 2][col] == WHITE and
                         BOARD[row + 3][col] == WHITE ):
-                    print("Four Connected")
+                    #print("Four Connected")
                     fourWConnected = True
 
         for row in range(1, ROWS - 4):
@@ -333,7 +333,7 @@ def numberOfWhiteConn():
                         BOARD[row + 1][col + 1] == WHITE and
                         BOARD[row + 2][col + 2] == WHITE and
                         BOARD[row + 3][col + 3] == WHITE ):
-                    print("Four Connected")
+                    #print("Four Connected")
                     fourWConnected = True
 
         for row in range(4, ROWS):
@@ -342,7 +342,7 @@ def numberOfWhiteConn():
                         BOARD[row - 1][col + 1] == WHITE and
                         BOARD[row - 2][col + 2] == WHITE and
                         BOARD[row - 3][col + 3] == WHITE ):
-                    print("Four Connected")
+                    #print("Four Connected")
                     fourWConnected = True
 
 
@@ -355,7 +355,7 @@ def numberOfBlackConn():
             if (BOARD[row][col] == BLACK and
                     BOARD[row][col + 1] == BLACK
             ):
-                print("Two BLACK Connected")
+                #print("Two BLACK Connected")
                 twoBConnected = True
 
     for row in range(1, ROWS - 2):
@@ -363,7 +363,7 @@ def numberOfBlackConn():
             if (BOARD[row][col] == BLACK and
                     BOARD[row + 1][col] == BLACK
             ):
-                print("Two BLACK Connected")
+                #print("Two BLACK Connected")
                 twoBConnected = True
 
     for row in range(1, ROWS - 2):
@@ -371,7 +371,7 @@ def numberOfBlackConn():
             if (BOARD[row][col] == BLACK and
                     BOARD[row + 1][col + 1] == BLACK
             ):
-                print("Two BLACK Connected")
+                #print("Two BLACK Connected")
                 twoBConnected = True
 
     for row in range(2, ROWS):
@@ -379,7 +379,7 @@ def numberOfBlackConn():
             if (BOARD[row][col] == BLACK and
                     BOARD[row - 1][col + 1] == BLACK
             ):
-                print("Two BLACK Connected")
+                #print("Two BLACK Connected")
                 twoBConnected = True
 
     # Three B connected
@@ -390,7 +390,7 @@ def numberOfBlackConn():
             if (BOARD[row][col] == BLACK and
                     BOARD[row][col + 1] == BLACK and
                     BOARD[row][col + 2] == BLACK):
-                print("Three BLACK Connected")
+                #print("Three BLACK Connected")
                 threeBConnected = True
 
     for row in range(1, ROWS - 3):
@@ -398,7 +398,7 @@ def numberOfBlackConn():
             if (BOARD[row][col] == BLACK and
                     BOARD[row + 1][col] == BLACK and
                     BOARD[row + 2][col] == BLACK):
-                print("Three BLACK Connected")
+                #print("Three BLACK Connected")
                 threeBConnected = True
 
     for row in range(1, ROWS - 3):
@@ -407,7 +407,7 @@ def numberOfBlackConn():
                     BOARD[row + 1][col + 1] == BLACK and
                     BOARD[row + 2][col + 2] == BLACK
             ):
-                print("Three BLACK Connected")
+                #print("Three BLACK Connected")
                 threeBConnected = True
 
     for row in range(3, ROWS):
@@ -415,7 +415,7 @@ def numberOfBlackConn():
             if (BOARD[row][col] == BLACK and
                     BOARD[row - 1][col + 1] == BLACK and
                     BOARD[row - 2][col + 2] == BLACK):
-                print("Three BLACK Connected")
+                #print("Three BLACK Connected")
                 threeBConnected = True
 
         # FOUR W CONNECTED
@@ -427,7 +427,7 @@ def numberOfBlackConn():
                         BOARD[row][col + 1] == BLACK and
                         BOARD[row][col + 2] == BLACK and
                         BOARD[row][col + 3] == BLACK):
-                    print("Four BLACK Connected")
+                    #print("Four BLACK Connected")
                     fourBConnected = True
 
         for row in range(1, ROWS - 4):
@@ -436,7 +436,7 @@ def numberOfBlackConn():
                         BOARD[row + 1][col] == BLACK and
                         BOARD[row + 2][col] == BLACK and
                         BOARD[row + 3][col] == BLACK):
-                    print("Four BLACK Connected")
+                    #print("Four BLACK Connected")
                     fourBConnected = True
 
         for row in range(1, ROWS - 4):
@@ -445,7 +445,7 @@ def numberOfBlackConn():
                         BOARD[row + 1][col + 1] == BLACK and
                         BOARD[row + 2][col + 2] == BLACK and
                         BOARD[row + 3][col + 3] == BLACK):
-                    print("Four BLACK Connected")
+                    #print("Four BLACK Connected")
                     fourBConnected = True
 
         for row in range(4, ROWS):
@@ -454,14 +454,14 @@ def numberOfBlackConn():
                         BOARD[row - 1][col + 1] == BLACK and
                         BOARD[row - 2][col + 2] == BLACK and
                         BOARD[row - 3][col + 3] == BLACK):
-                    print("Four BLACK Connected")
+                    #print("Four BLACK Connected")
                     fourBConnected = True
 
 
 
 def EvaluateFunction():
-
-
+    numberOfBlackConn()
+    numberOfWhiteConn()
 
 
 
@@ -470,18 +470,19 @@ def EvaluateFunction():
         return 5
     elif winnerIsBlack()==True:
         return -5
-    elif twoWConnected == True:
-        return 2
-    elif threeWConnected == True:
-        return 3
     elif fourWConnected == True:
         return 4
-    elif twoBConnected == True:
-        return -2
-    elif threeBConnected == True:
-        return -3
+    elif threeWConnected == True:
+        return 3
+    elif twoWConnected == True:
+        return 2
     elif fourBConnected == True:
         return -4
+    elif threeBConnected == True:
+        return -3
+    elif twoBConnected == True:
+        return -2
+
     else:
         return 0
 
