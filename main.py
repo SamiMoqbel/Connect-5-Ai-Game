@@ -1,12 +1,7 @@
 #Sami Moqbel : 1200751
 #Lama Abdelmohsen : 1201138
 #AI Magnetic Cave Game
-"""
 
-“We certify that this submission is the original work of members of the group and meets
-#the Faculty's Expectations of Originality”
-
-"""
 import copy
 
 COLUMNS=10
@@ -15,6 +10,13 @@ BLACK="\u25A2"
 WHITE="\u25A0"
 BOARD = [["" for _ in range(COLUMNS)] for _ in range(ROWS)]
 PLAYER=BLACK
+twoWConnected=False
+threeWConnected=False
+fourWConnected=False
+twoBConnected=False
+threeBConnected=False
+fourBConnected=False
+
 
 def playAMove():
     coordinates=[0,0]
@@ -228,14 +230,258 @@ def winnerIsWhite():
 
     return False
 
+def numberOfWhiteConn():
+
+    #TWO CONNECTED
+
+    # Check horizontal winning
+    for row in range(1, ROWS - 1):
+        for col in range(1, COLUMNS - 2):
+            if (BOARD[row][col] == WHITE and
+                    BOARD[row][col + 1] == WHITE
+                    ):
+                print("Two Connected")
+                twoWConnected=True
+
+
+    for row in range(1, ROWS - 2):
+        for col in range(1, COLUMNS - 1):
+            if (BOARD[row][col] == WHITE and
+                    BOARD[row + 1][col] == WHITE
+                    ):
+                print("Two Connected")
+                twoWConnected = True
+
+    for row in range(1, ROWS - 2):
+        for col in range(1, COLUMNS - 2):
+            if (BOARD[row][col] == WHITE and
+                    BOARD[row + 1][col + 1] == WHITE
+                    ):
+                print("Two Connected")
+                twoWConnected = True
+
+    for row in range(2, ROWS):
+        for col in range(1, COLUMNS - 2):
+            if (BOARD[row][col] == WHITE and
+                    BOARD[row - 1][col + 1] == WHITE
+                    ):
+                print("Two Connected")
+                twoWConnected = True
+
+
+#Three W connected
+
+# Check horizontal winning
+    for row in range(1,ROWS-1):
+        for col in range(1,COLUMNS - 3):
+            if (BOARD[row][col] ==WHITE and
+                BOARD[row][col + 1] == WHITE and
+                BOARD[row][col + 2] == WHITE ):
+                print("Three Connected")
+                threeWConnected = True
+
+    for row in range(1,ROWS - 3):
+        for col in range(1,COLUMNS-1):
+            if (BOARD[row][col] == WHITE and
+                BOARD[row + 1][col] ==WHITE and
+                BOARD[row + 2][col] ==WHITE ):
+                print("Three Connected")
+                threeWConnected = True
+
+    for row in range(1,ROWS - 3):
+        for col in range(1,COLUMNS - 3):
+            if (BOARD[row][col] == WHITE and
+                BOARD[row + 1][col + 1] == WHITE and
+                BOARD[row + 2][col + 2] == WHITE
+                ):
+                print("Three Connected")
+                threeWConnected = True
+
+    for row in range(3, ROWS):
+        for col in range(1,COLUMNS - 3):
+            if (BOARD[row][col] == WHITE and
+                BOARD[row -1 ][col + 1] == WHITE and
+                BOARD[row -2][col + 2] == WHITE  ):
+                print("Three Connected")
+                threeWConnected = True
+
+
+# FOUR W CONNECTED
+
+        # Check horizontal winning
+        for row in range(1, ROWS - 1):
+            for col in range(1, COLUMNS - 4):
+                if (BOARD[row][col] == WHITE and
+                        BOARD[row][col + 1] == WHITE and
+                        BOARD[row][col + 2] == WHITE and
+                        BOARD[row][col + 3] == WHITE ):
+                    print("Four Connected")
+                    fourWConnected = True
+
+        for row in range(1, ROWS - 4):
+            for col in range(1, COLUMNS - 1):
+                if (BOARD[row][col] == WHITE and
+                        BOARD[row + 1][col] == WHITE and
+                        BOARD[row + 2][col] == WHITE and
+                        BOARD[row + 3][col] == WHITE ):
+                    print("Four Connected")
+                    fourWConnected = True
+
+        for row in range(1, ROWS - 4):
+            for col in range(1, COLUMNS - 4):
+                if (BOARD[row][col] == WHITE and
+                        BOARD[row + 1][col + 1] == WHITE and
+                        BOARD[row + 2][col + 2] == WHITE and
+                        BOARD[row + 3][col + 3] == WHITE ):
+                    print("Four Connected")
+                    fourWConnected = True
+
+        for row in range(4, ROWS):
+            for col in range(1, COLUMNS - 4):
+                if (BOARD[row][col] == WHITE and
+                        BOARD[row - 1][col + 1] == WHITE and
+                        BOARD[row - 2][col + 2] == WHITE and
+                        BOARD[row - 3][col + 3] == WHITE ):
+                    print("Four Connected")
+                    fourWConnected = True
+
+
+def numberOfBlackConn():
+    # TWO CONNECTED
+
+    # Check horizontal winning
+    for row in range(1, ROWS - 1):
+        for col in range(1, COLUMNS - 2):
+            if (BOARD[row][col] == BLACK and
+                    BOARD[row][col + 1] == BLACK
+            ):
+                print("Two BLACK Connected")
+                twoBConnected = True
+
+    for row in range(1, ROWS - 2):
+        for col in range(1, COLUMNS - 1):
+            if (BOARD[row][col] == BLACK and
+                    BOARD[row + 1][col] == BLACK
+            ):
+                print("Two BLACK Connected")
+                twoBConnected = True
+
+    for row in range(1, ROWS - 2):
+        for col in range(1, COLUMNS - 2):
+            if (BOARD[row][col] == BLACK and
+                    BOARD[row + 1][col + 1] == BLACK
+            ):
+                print("Two BLACK Connected")
+                twoBConnected = True
+
+    for row in range(2, ROWS):
+        for col in range(1, COLUMNS - 2):
+            if (BOARD[row][col] == BLACK and
+                    BOARD[row - 1][col + 1] == BLACK
+            ):
+                print("Two BLACK Connected")
+                twoBConnected = True
+
+    # Three B connected
+
+    # Check horizontal winning
+    for row in range(1, ROWS - 1):
+        for col in range(1, COLUMNS - 3):
+            if (BOARD[row][col] == BLACK and
+                    BOARD[row][col + 1] == BLACK and
+                    BOARD[row][col + 2] == BLACK):
+                print("Three BLACK Connected")
+                threeBConnected = True
+
+    for row in range(1, ROWS - 3):
+        for col in range(1, COLUMNS - 1):
+            if (BOARD[row][col] == BLACK and
+                    BOARD[row + 1][col] == BLACK and
+                    BOARD[row + 2][col] == BLACK):
+                print("Three BLACK Connected")
+                threeBConnected = True
+
+    for row in range(1, ROWS - 3):
+        for col in range(1, COLUMNS - 3):
+            if (BOARD[row][col] == BLACK and
+                    BOARD[row + 1][col + 1] == BLACK and
+                    BOARD[row + 2][col + 2] == BLACK
+            ):
+                print("Three BLACK Connected")
+                threeBConnected = True
+
+    for row in range(3, ROWS):
+        for col in range(1, COLUMNS - 3):
+            if (BOARD[row][col] == BLACK and
+                    BOARD[row - 1][col + 1] == BLACK and
+                    BOARD[row - 2][col + 2] == BLACK):
+                print("Three BLACK Connected")
+                threeBConnected = True
+
+        # FOUR W CONNECTED
+
+        # Check horizontal winning
+        for row in range(1, ROWS - 1):
+            for col in range(1, COLUMNS - 4):
+                if (BOARD[row][col] == BLACK and
+                        BOARD[row][col + 1] == BLACK and
+                        BOARD[row][col + 2] == BLACK and
+                        BOARD[row][col + 3] == BLACK):
+                    print("Four BLACK Connected")
+                    fourBConnected = True
+
+        for row in range(1, ROWS - 4):
+            for col in range(1, COLUMNS - 1):
+                if (BOARD[row][col] == BLACK and
+                        BOARD[row + 1][col] == BLACK and
+                        BOARD[row + 2][col] == BLACK and
+                        BOARD[row + 3][col] == BLACK):
+                    print("Four BLACK Connected")
+                    fourBConnected = True
+
+        for row in range(1, ROWS - 4):
+            for col in range(1, COLUMNS - 4):
+                if (BOARD[row][col] == BLACK and
+                        BOARD[row + 1][col + 1] == BLACK and
+                        BOARD[row + 2][col + 2] == BLACK and
+                        BOARD[row + 3][col + 3] == BLACK):
+                    print("Four BLACK Connected")
+                    fourBConnected = True
+
+        for row in range(4, ROWS):
+            for col in range(1, COLUMNS - 4):
+                if (BOARD[row][col] == BLACK and
+                        BOARD[row - 1][col + 1] == BLACK and
+                        BOARD[row - 2][col + 2] == BLACK and
+                        BOARD[row - 3][col + 3] == BLACK):
+                    print("Four BLACK Connected")
+                    fourBConnected = True
+
 
 
 def EvaluateFunction():
 
+
+
+
+
+
     if winnerIsWhite()==True:
-        return 1
+        return 5
     elif winnerIsBlack()==True:
-        return -1
+        return -5
+    elif twoWConnected == True:
+        return 2
+    elif threeWConnected == True:
+        return 3
+    elif fourWConnected == True:
+        return 4
+    elif twoBConnected == True:
+        return -2
+    elif threeBConnected == True:
+        return -3
+    elif fourBConnected == True:
+        return -4
     else:
         return 0
 
@@ -444,7 +690,7 @@ if __name__ == "__main__":
 
                 else:
                     print("[PLAYER 2] IS THINKING......")
-                    value,aiMove= minimax(BOARD,4,True)
+                    value,aiMove= minimax(BOARD,3,True)
                     BOARD=aiMove
                     changeTurn()
                     printBoard(BOARD)
@@ -534,7 +780,7 @@ if __name__ == "__main__":
 
                 else:
                     print("[PLAYER 2] IS THINKING......")
-                    value, aiMove = minimax(BOARD, 4, True)
+                    value, aiMove = minimax(BOARD, 3, True)
                     BOARD = aiMove
                     changeTurn()
                     printBoard(BOARD)
