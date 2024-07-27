@@ -43,30 +43,31 @@ Create the Bash Script:
 
 Create a bash script named run_game.sh with the following content:
 
-bash
-"
-#!/bin/bash
-
-# Check if the required Python script exists
-if [[ ! -f "ai_magnetic_cave_game.py" ]]; then
-    echo "The ai_magnetic_cave_game.py script is missing."
-    exit 1
-fi
-"
+ ```bash
+    #!/bin/bash
+    
+    # Check if the required Python script exists
+    if [[ ! -f "ai_magnetic_cave_game.py" ]]; then
+        echo "The ai_magnetic_cave_game.py script is missing."
+        exit 1
+    fi
+ ```
 
 # Run the Python script
+ ```bash
 python ai_magnetic_cave_game.py
+ ```
 
 Make the script executable:
-"
-bash
+
+ ```bash
 chmod +x run_game.sh
-"
+ ```
 
 Run the Game:
 
 Execute the bash script to start the game:
 
-bash
+ ```bash
 ./run_game.sh
-
+ ```
